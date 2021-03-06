@@ -1,0 +1,45 @@
+---
+title: "Homework 03: Probability"
+subtitle: "Due: Friday, March 5 11:59pm ET"
+author: ""
+date: ""
+output:
+  pdf_document: default
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, message = FALSE, 
+                      warning = FALSE, comment = "#>", highlight = TRUE)
+```
+
+# Packages
+
+```{r packages}
+library(tidyverse)
+```
+
+# Part I
+
+## Data
+
+```{r data}
+gamble <- read_table("http://users.stat.ufl.edu/~winner/data/riskgamble.dat",
+                      col_names = FALSE)
+
+gamble
+```
+
+#### Exercise 1
+
+```{r ex_1}
+
+```
+
+
+
+# Part II
+
+```{r set_seed}
+set.seed(2357822)
+```
+
