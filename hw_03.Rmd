@@ -29,15 +29,57 @@ gamble <- read_table("http://users.stat.ufl.edu/~winner/data/riskgamble.dat",
 gamble
 ```
 
-#### Exercise 1
-
-```{r ex_1}
-
+```{r}
+gamble <- rename(gamble, decision_1 = X1)
+gamble <- rename(gamble, decision_2 = X2)
+gamble <- rename(gamble, count = X3) %>%
+  mutate(decision_1 = case_when(decision_1 == 1 ~ "A",
+                                decision_1 == 2 ~ "B")) %>%
+  mutate(decision_2 = case_when(decision_2 == 1 ~"C", decision_2 == 2 ~"D"))
+gamble
 ```
 
 
+#### Exercise 1
+
+```{r ex_1}
+gamble %>%
+  group_by(decision_1) %>%
+  summarize(total_count = sum(count)) %>%
+  mutate(sum_total_count = sum(total_count)) %>%
+  filter(decision_1 == "A") %>%
+  mutate(probability = total_count/sum_total_count) %>%
+  select(decision_1, probability)
+```
+
+#### Exercise 2
+
+```{r}
+gamble %>%
+  mutate(total_count = sum(count)) %>%
+  filter(decision_1 == "A", decision_2 == "D") %>%
+  mutate(probability = count/total_count) %>%
+  select(-count, -total_count)
+```
+
+
+#### Exercise 3
+
+#### Exercise 4
+
+#### Exercise 5
+
+#### Exercise 6
+
+#### Exercise 7
 
 # Part II
+
+#### Exercise 8
+
+#### Exercise 9
+
+#### Exercise 10
 
 ```{r set_seed}
 set.seed(2357822)
