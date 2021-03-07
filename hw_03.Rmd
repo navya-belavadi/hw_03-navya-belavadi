@@ -1,8 +1,8 @@
 ---
 title: "Homework 03: Probability"
 subtitle: "Due: Friday, March 5 11:59pm ET"
-author: ""
-date: ""
+author: "Navya Belavadi"
+date: "03-05-2021"
 output:
   pdf_document: default
 ---
@@ -67,7 +67,7 @@ gamble %>%
 Here, I computed the probability a person chose "A" and "D."
 
 
-```{r ex_2}
+```{r ex_3}
 gamble %>%
   mutate(total_count = sum(count)) %>%
   filter(decision_1 == "A", decision_2 == "D") %>%
@@ -81,7 +81,7 @@ gamble %>%
 In this code chunk, I found the probability that a person who chose "B" for 
 Decision 1 would choose "D" for Decision 2.
 
-```{r}
+```{r ex_4}
 gamble %>%
   filter(decision_1 == "B") %>%
   mutate(total_count = sum(count)) %>%
@@ -102,7 +102,7 @@ because it is not possible for Decision 2 to be anything besides C or D.
 In this code chunk, I found the probability that a person who chooses "D" for 
 Decision 2 chose "B" for Decision 1.
 
-```{r}
+```{r ex_6}
 gamble %>%
   filter(decision_2 == "D") %>%
   mutate(total_count = sum(count)) %>%
@@ -127,18 +127,15 @@ set.seed(2357822)
 In this exercise I am calculating the probability that someone would get 
 matching numbers when drawing a card from a deck and rolling a 6-sided die. 
 
-
-
-```{r}
+```{r ex_8}
 
 results <- tibble(
   die = replicate(n = 10000, expr = sample(1:6, size = 1)),
   cards = replicate(n = 10000, expr = sample(2:14, size = 1)))
 results <- results %>%
-  mutate(event = (die == 6 | cards == 11:13))
+  mutate(event = die == cards)
 results %>%
   summarize(probability = mean(event))
-
 ```
 
 
@@ -146,18 +143,32 @@ results %>%
 #### Exercise 9
 In this exercise I find the probability that someone would get a face card or 
 6 on a die upon drawing a card from a deck and rolling a 6-sided die. 
-```{r}
+
+```{r ex_9}
+results <- tibble(
+  die = replicate(n=10000, expr=sample(1:6, size=1)),
+  cards = replicate(n=10000, expr=sample(2:14, size=1)))
+results <- results %>%
+  mutate(event = (die == 6 | cards == 11:13))
+results %>%
+  summarize(probability = mean(event))
+```
+
+
+#### Exercise 10
+
+In this code chunk I find the probability that all 3 cards drawn from
+a deck sequentially are in increasing order, with ties not counting. 
+```{r ex_10}
 results <- tibble(
   cards_1 = replicate(n=10000, expr=sample(2:14, size=1)),
   cards_2 = replicate(n=10000, expr=sample(2:14, size=1)),
   cards_3 = replicate(n=10000, expr=sample(2:14, size=1))
 )
-```
-
-
-#### Exercise 10
-```{r}
-
+results <- results %>%
+  mutate(event = cards_3 > cards_2 & cards_2 > cards_1)
+  results %>%
+    summarize(probability=mean(event))
 ```
 
 
