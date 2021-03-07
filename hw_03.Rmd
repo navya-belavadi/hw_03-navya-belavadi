@@ -114,15 +114,50 @@ gamble %>%
 
 #### Exercise 7
 
+If given the choice, I would select 
+
 # Part II
 
-#### Exercise 8
-
-#### Exercise 9
-
-#### Exercise 10
 
 ```{r set_seed}
 set.seed(2357822)
 ```
+
+#### Exercise 8
+In this exercise I am calculating the probability that someone would get 
+matching numbers when drawing a card from a deck and rolling a 6-sided die. 
+
+
+
+```{r}
+
+results <- tibble(
+  die = replicate(n = 10000, expr = sample(1:6, size = 1)),
+  cards = replicate(n = 10000, expr = sample(2:14, size = 1)))
+results <- results %>%
+  mutate(event = (die == 6 | cards == 11:13))
+results %>%
+  summarize(probability = mean(event))
+
+```
+
+
+
+#### Exercise 9
+In this exercise I find the probability that someone would get a face card or 
+6 on a die upon drawing a card from a deck and rolling a 6-sided die. 
+```{r}
+results <- tibble(
+  cards_1 = replicate(n=10000, expr=sample(2:14, size=1)),
+  cards_2 = replicate(n=10000, expr=sample(2:14, size=1)),
+  cards_3 = replicate(n=10000, expr=sample(2:14, size=1))
+)
+```
+
+
+#### Exercise 10
+```{r}
+
+```
+
 
