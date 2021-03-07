@@ -114,7 +114,13 @@ gamble %>%
 
 #### Exercise 7
 
-If given the choice, I would select 
+There are many outcomes here, but the choice that would give me the best 
+possibility of leaving with no less money than I entered with is choice B and D.
+Obviously I would not choose C (sure loss of $750), but in the case of D, I at 
+least have just a 75% chance of losing something rather than a 100% chance of 
+losing money. Choice B gives me the 25% chance to cancel out the $1000 loss if 
+that were to occur, and there's no foul for the other 75% chance (I gain 
+nothing, which does not harm me).
 
 # Part II
 
@@ -128,7 +134,6 @@ In this exercise I am calculating the probability that someone would get
 matching numbers when drawing a card from a deck and rolling a 6-sided die. 
 
 ```{r ex_8}
-
 results <- tibble(
   die = replicate(n = 10000, expr = sample(1:6, size = 1)),
   cards = replicate(n = 10000, expr = sample(2:14, size = 1)))
@@ -159,6 +164,7 @@ results %>%
 
 In this code chunk I find the probability that all 3 cards drawn from
 a deck sequentially are in increasing order, with ties not counting. 
+
 ```{r ex_10}
 results <- tibble(
   cards_1 = replicate(n=10000, expr=sample(2:14, size=1)),
