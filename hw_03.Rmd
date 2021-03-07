@@ -29,7 +29,13 @@ gamble <- read_table("http://users.stat.ufl.edu/~winner/data/riskgamble.dat",
 gamble
 ```
 
-```{r}
+
+
+#### Exercise 1
+
+In this code chunk, I mutated gamble and created a tibble. 
+
+```{r ex_1}
 gamble <- rename(gamble, decision_1 = X1)
 gamble <- rename(gamble, decision_2 = X2)
 gamble <- rename(gamble, count = X3) %>%
@@ -40,11 +46,13 @@ gamble
 ```
 
 
-#### Exercise 1
+#### Exercise 2
 
-In this code chunk, I mutated gamble and created a tibble. 
+In this exercise, I computed the probability that a person chose "A" for 
+Decision 1. 
 
-```{r ex_1}
+
+```{r ex_2}
 gamble %>%
   group_by(decision_1) %>%
   summarize(total_count = sum(count)) %>%
@@ -54,10 +62,10 @@ gamble %>%
   select(decision_1, probability)
 ```
 
-#### Exercise 2
+#### Exercise 3
 
-In this exercise, I computed the probability that a person chose "A" for 
-Decision 1. 
+Here, I computed the probability a person chose "A" and "D."
+
 
 ```{r ex_2}
 gamble %>%
@@ -67,18 +75,6 @@ gamble %>%
   select(-count, -total_count)
 ```
 
-#### Exercise 3
-
-Here, I computed the probability a person chose "A" and "D."
-
-```{r}
-gamble %>%
-  filter(decision_1 == "B") %>%
-  mutate(total_count = sum(count)) %>%
-  mutate(probability = count/total_count) %>%
-  filter(decision_2 == "D") %>%
-  select(probability)
-```
 
 #### Exercise 4
 
@@ -87,6 +83,27 @@ Decision 1 would choose "D" for Decision 2.
 
 ```{r}
 gamble %>%
+  filter(decision_1 == "B") %>%
+  mutate(total_count = sum(count)) %>%
+  mutate(probability = count/total_count) %>%
+  filter(decision_2 == "D") %>%
+  select(probability)
+```
+
+
+#### Exercise 5
+
+In this exercise, I am to find the probability that a person who chose "B" for 
+Decision 1 would choose "A" for Decision 2. This probability is 0, simply 
+because it is not possible for Decision 2 to be anything besides C or D. 
+
+#### Exercise 6
+
+In this code chunk, I found the probability that a person who chooses "D" for 
+Decision 2 chose "B" for Decision 1.
+
+```{r}
+gamble %>%
   filter(decision_2 == "D") %>%
   mutate(total_count = sum(count)) %>%
   mutate(probability = count/total_count) %>%
@@ -94,10 +111,6 @@ gamble %>%
   select(probability)
 ```
 
-
-#### Exercise 5
-
-#### Exercise 6
 
 #### Exercise 7
 
