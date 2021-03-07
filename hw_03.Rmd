@@ -42,6 +42,8 @@ gamble
 
 #### Exercise 1
 
+In this code chunk, I mutated gamble and created a tibble. 
+
 ```{r ex_1}
 gamble %>%
   group_by(decision_1) %>%
@@ -54,7 +56,10 @@ gamble %>%
 
 #### Exercise 2
 
-```{r}
+In this exercise, I computed the probability that a person chose "A" for 
+Decision 1. 
+
+```{r ex_2}
 gamble %>%
   mutate(total_count = sum(count)) %>%
   filter(decision_1 == "A", decision_2 == "D") %>%
@@ -62,10 +67,33 @@ gamble %>%
   select(-count, -total_count)
 ```
 
-
 #### Exercise 3
 
+Here, I computed the probability a person chose "A" and "D."
+
+```{r}
+gamble %>%
+  filter(decision_1 == "B") %>%
+  mutate(total_count = sum(count)) %>%
+  mutate(probability = count/total_count) %>%
+  filter(decision_2 == "D") %>%
+  select(probability)
+```
+
 #### Exercise 4
+
+In this code chunk, I found the probability that a person who chose "B" for 
+Decision 1 would choose "D" for Decision 2.
+
+```{r}
+gamble %>%
+  filter(decision_2 == "D") %>%
+  mutate(total_count = sum(count)) %>%
+  mutate(probability = count/total_count) %>%
+  filter(decision_1 == "B") %>%
+  select(probability)
+```
+
 
 #### Exercise 5
 
